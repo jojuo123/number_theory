@@ -1,5 +1,6 @@
 import copy
 from functools import reduce
+import math
 
 def power(base, exp, modulus):
     result = 1
@@ -34,7 +35,7 @@ def modular_sqrt(a, p):
         return -1 if ls == p - 1 else ls
 
     if legendre_symbol(a, p) != 1:
-        return 0
+        return -1
     elif a == 0:
         return 0
     elif p == 2:
@@ -147,6 +148,9 @@ def Factorize(n):
     factors = []
     global primes
     pf_idx = 0
+    if len(factors) == 0:
+        factors.append([n, 1])
+    return factors
     pf = primes[pf_idx]
     while (pf * pf <= n):
         cnt = 0
@@ -171,7 +175,7 @@ def chinese_remainder(n, a):
 
 def CompositeModularSqrt(a, n):
     global primes
-    Sieve(n)
+    Sieve(math.ceil(math.sqrt(n)))
     if n % 2 == 0:
         print('No solution')
         return -1
@@ -180,6 +184,9 @@ def CompositeModularSqrt(a, n):
     aCRT = []
     for f in factors:
         a_i = HenselLifting(a, f[0], f[1])
+        if a_i == -1:
+            print('No solution')
+            return 0
         n_i = f[0]**f[1]
         nCRT.append(n_i)
         aCRT.append(a_i)
@@ -188,8 +195,8 @@ def CompositeModularSqrt(a, n):
 primes = []
 if __name__=='__main__':
     
-    # a = int(input('enter a: '))
-    # n = int(input('enter n: '))
-    # print('SQRT: ', CompositeModularSqrt(a, n))
+    a = int(input('enter a: '))
+    n = int(input('enter n: '))
+    print('SQRT: ', CompositeModularSqrt(a, n))
     #print(power(287, 2, 673))
-    print(HenselLifting(30, 101, 1))
+    #print(HenselLifting(3, 2003, 1))
