@@ -12,10 +12,9 @@ def is_prime(n: int) -> bool:
     return True
 
 def __findAllprime(p):
-    ###find all prime smaller than square root of p
+    ###find all prime smaller than  p
     list = []
-    r =  int(math.sqrt(p))
-    for i in range (2,r+1):
+    for i in range (2,p):
         if(is_prime(i)):
             list.append(i)
     return list
