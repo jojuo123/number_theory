@@ -148,10 +148,11 @@ def Factorize(n):
     factors = []
     global primes
     pf_idx = 0
-    if len(factors) == 0:
+    if len(primes) == 0:
         factors.append([n, 1])
-    return factors
+        return factors
     pf = primes[pf_idx]
+    #print(pf)
     while (pf * pf <= n):
         cnt = 0
         while n % pf == 0:
@@ -160,7 +161,10 @@ def Factorize(n):
         if cnt > 0:
             factors.append([pf, cnt])
         pf_idx += 1
-        pf = primes[pf_idx]
+        if (pf_idx < len(primes)):
+            pf = primes[pf_idx]
+        else:
+            break
     if n != 1:
         factors.append([n, 1])
     return factors
@@ -176,10 +180,12 @@ def chinese_remainder(n, a):
 def CompositeModularSqrt(a, n):
     global primes
     Sieve(math.ceil(math.sqrt(n)))
+    print(primes)
     if n % 2 == 0:
         print('No solution')
-        return -1
+        return 0
     factors = Factorize(n)
+    print(factors)
     nCRT = []
     aCRT = []
     for f in factors:
@@ -198,5 +204,6 @@ if __name__=='__main__':
     a = int(input('enter a: '))
     n = int(input('enter n: '))
     print('SQRT: ', CompositeModularSqrt(a, n))
+    #print(HenselLifting(7, 3, 2))
     #print(power(287, 2, 673))
     #print(HenselLifting(3, 2003, 1))
