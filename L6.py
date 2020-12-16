@@ -79,19 +79,42 @@ def printFullSol(n:float, ub: int):
     print(abs(res_arr[len(res_arr)-2][5]),end = "")
     print("/",end="")
     print(abs(res_arr[len(res_arr)-2][6]))
+
+def __gcd(a,b):
+  if (a%b):
+    return __gcd(b,a%b)
+  return b
+
+def taolao(n):
+    number_split = n.split('.')
+    number_str = number_split[1]
+    #number = int(number_str)
+    #print(number_str)
+    pre = 1
+    for i in range(len(number_str)):
+        pre *= 10
+    number = int(number_split[0] + number_split[1])
+    print(number)
+    gcd = __gcd(pre, number)
+    numer = number // gcd
+    denom = pre // gcd 
+    print(numer, '/', denom)
+    
 #test lab 2019
 if __name__ == "__main__":
-    test_case = [0.372636, 0.373346671, 0.2173836482, 0.09375] #0.09365 is an extra to ensure
-    precision = [1000, 10000, 100000, 100]
+    test_case = [0.372636, 0.373346671, 0.2173836482, 0.33333] #0.09365 is an extra to ensure
+    precision = [1000, 10000, 100000, 100000]
     i = 1
     j = 0 #set j = 1 for detailed solution
-    for t in test_case:
-        print("test:",i)
-        if j:
-            printFullSol(t,precision[i-1])
-        else:
-            printSolOnly(t,precision[i-1])
-        i+=1
-        print()
-        
+    # for t in test_case:
+    #     print("test:",i)
+    #     if j:
+    #         printFullSol(t,precision[i-1])
+    #     else:
+    #         printSolOnly(t,precision[i-1])
+    #     i+=1
+    #     print()
+    n = input('n = ')
+    taolao(n)
+
 

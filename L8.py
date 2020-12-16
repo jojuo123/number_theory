@@ -19,7 +19,28 @@ def jacobi(a, n):
         return result
     else:
         return 0
+
+def bookJacobi(a, n):
+    result = 1
+    while True:
+        a %= n
+        if a == 0:
+            if n == 1:
+                return result
+            else:
+                return 0
+        h = 0
+        a_pr = a
+        while a_pr % 2 == 0:
+            a_pr //= 2
+            h += 1
+        if h % 2 == 1 and (n % 8 != 1 and n % 8 != 7):
+            result = -result
+        if a_pr % 4 != 1 and n % 4 != 1:
+            result = -result
+        a, n = n, a_pr
 if __name__=='__main__':
     a = int(input('enter a: '))
     n = int(input('enter n: '))
     print('jacobi', jacobi(a, n))
+    print(bookJacobi(a, n))

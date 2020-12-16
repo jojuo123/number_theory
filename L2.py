@@ -26,7 +26,6 @@ def find_result(p):
             result = qlist[i] + 1
             return result
     return result
-            
 
 p = int(input("Nhap so hang: "))
 if (is_prime(p) and (p - 1) % 4 == 0):
@@ -35,6 +34,8 @@ if (is_prime(p) and (p - 1) % 4 == 0):
     if(tmp < 50): 
         print (result**tmp)
     else:
-        print(result, "^",tmp)
+        print(pow(result, tmp, p))
 else:
     print("Invalid input")
+
+    
